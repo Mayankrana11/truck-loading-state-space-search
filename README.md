@@ -356,15 +356,7 @@ $$
 Therefore:
 
 $$
-h_3(s)
-=
-\beta
-\sum_{p \in Remaining}
-\left(
-\max(CurrentTime, ArrivalTime_p)
-+ Destination_p
-- ArrivalTime_p
-\right)
+h_3(s) = \beta \sum_{p \in Remaining} \left( \max(CurrentTime, ArrivalTime_p) + Destination_p - ArrivalTime_p \right)
 $$
 
 This represents a lower bound on the remaining delay component of the scaled objective.
