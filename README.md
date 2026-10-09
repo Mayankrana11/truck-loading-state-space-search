@@ -9,6 +9,31 @@
 
 This project addresses the problem of planning the loading and delivery of packages at a logistics dispatch centre using state-space search.
 
+### Running Instructions
+
+To build and run the project, you can use the provided `Makefile`.
+
+**Build the main application:**
+```bash
+make
+```
+This generates `TruckLoading.exe`.
+
+**Run specific test suites:**
+The project includes several test binaries to verify different components:
+- `make optimal`: Builds `test_optimal.exe` to verify solution optimality.
+- `make state`: Builds `test_state.exe` to verify state representation and identity.
+- `make problem`: Builds `test_problem.exe` to verify problem instance loading.
+- `make search`: Builds `test_search.exe` to verify search algorithm correctness.
+- `make heuristic`: Builds `test_heuristics.exe` to verify heuristic admissibility and consistency.
+
+**Clean build artifacts:**
+```bash
+make clean
+```
+
+---
+
 Packages arrive at the dispatch centre over time and must be assigned to delivery trucks. Each package has an arrival time and a destination located along a common highway. Trucks have a fixed carrying capacity and can be reused after completing their delivery runs.
 
 The objective is to find a delivery plan that provides a good trade-off between:
@@ -348,15 +373,13 @@ for guaranteed admissibility under the reusable-truck model.
 For each remaining package $p$, the earliest possible delivery delay is:
 
 $$
-\max(CurrentTime, ArrivalTime_p)
-+ Destination_p
-- ArrivalTime_p
+\max(\text{CurrentTime}, \text{ArrivalTime}_p) + \text{Destination}_p - \text{ArrivalTime}_p
 $$
 
 Therefore:
 
 $$
-h_3(s) = \beta \sum_{p \in Remaining} \left( \max(CurrentTime, ArrivalTime_p) + Destination_p - ArrivalTime_p \right)
+h_3(s) = \beta \sum_{p \in Remaining} \left( \max(\text{CurrentTime}, \text{ArrivalTime}_p) + \text{Destination}_p - \text{ArrivalTime}_p \right)
 $$
 
 This represents a lower bound on the remaining delay component of the scaled objective.
